@@ -1,5 +1,5 @@
 const Direction = () => {
-  return <div>direction</div>;
+  return <div>Stop</div>;
 };
 
 export default Direction;

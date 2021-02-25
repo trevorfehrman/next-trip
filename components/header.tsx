@@ -1,6 +1,10 @@
 import styles from '../styles/Header.module.scss';
 const Header = () => {
-  return <div className={styles.test}>hi</div>;
+  return (
+    <div>
+      <img src='/MetroTransitLogo.svg' alt='' />
+    </div>
+  );
 };
 
 export { Header };

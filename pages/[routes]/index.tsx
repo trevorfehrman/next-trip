@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const Route = () => {
   return (
-    <motion.main initial={{ y: '-100vh' }} animate={{ y: 0 }} exit={{ y: '-100vh' }}>
+    <motion.main initial={{ x: '100vw' }} animate={{ x: 0 }} exit={{ x: '100vw' }}>
       <div>direction1</div>
     </motion.main>
   );

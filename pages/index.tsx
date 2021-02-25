@@ -26,14 +26,29 @@ type HomeProps = {
 };
 
 const Home = ({ routes }: HomeProps) => {
+  const [searchTerm, setSearchTerm] = React.useState<string>('');
+
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setSearchTerm(event.target.value);
+  }
+
   return (
     <motion.main exit={{ x: '-100vw' }} initial={{ x: -300 }} animate={{ x: 0 }}>
+      <input type='text' onChange={handleChange} value={searchTerm} />
       <ul>
-        {routes.map(route => (
-          <Link href={`/${route.Route}`} key={route.Route}>
-            <li className={styles.route}>{route.Description}</li>
-          </Link>
-        ))}
+        {routes
+          .filter(route => {
+            if (!searchTerm) {
+              return true;
+            } else {
+              return route.Description.toLowerCase().includes(searchTerm.toLowerCase());
+            }
+          })
+          .map(route => (
+            <Link href={`/${route.Route}`} key={route.Route}>
+              <li className={styles.route}>{route.Description}</li>
+            </Link>
+          ))}
       </ul>
     </motion.main>
   );
