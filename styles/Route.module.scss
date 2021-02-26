@@ -1,0 +1,15 @@
+.direction {
+  height: calc(50vh - 4.8rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
+}
+
+.firstDirection {
+  background-color: #e54150;
+}
+.secondDirection {
+  background-color: #5353ee;
+}

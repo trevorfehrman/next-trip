@@ -1,12 +1,13 @@
 import * as React from 'react';
-import styles from '../styles/Home.module.scss';
+import styles from 'styles/Home.module.scss';
 
 import Head from 'next/head';
 import Link from 'next/link';
 
-import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-import { IRoute } from '../interfaces';
+import { IRoute } from 'interfaces';
+import { RouteContext } from './_app';
 
 function getRoutes() {
   return fetch('http://svc.metrotransit.org/NexTrip/Routes?format=json', {
@@ -27,14 +28,21 @@ type HomeProps = {
 
 const Home = ({ routes }: HomeProps) => {
   const [searchTerm, setSearchTerm] = React.useState<string>('');
+  const { setRouteDirection } = React.useContext(RouteContext);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setSearchTerm(event.target.value);
   }
 
   return (
-    <motion.main exit={{ x: '-100vw' }} initial={{ x: -300 }} animate={{ x: 0 }}>
-      <input type='text' onChange={handleChange} value={searchTerm} />
+    <motion.main initial={{ y: '100vh' }} animate={{ y: 0 }} exit={{ y: '100vh' }}>
+      <input
+        placeholder='Search...'
+        type='text'
+        onChange={handleChange}
+        value={searchTerm}
+        className={styles.searchField}
+      />
       <ul>
         {routes
           .filter(route => {
@@ -46,7 +54,12 @@ const Home = ({ routes }: HomeProps) => {
           })
           .map(route => (
             <Link href={`/${route.Route}`} key={route.Route}>
-              <li className={styles.route}>{route.Description}</li>
+              <li
+                onClick={() => setRouteDirection({ route: route.Description, direction: '' })}
+                className={styles.route}
+              >
+                {route.Description}
+              </li>
             </Link>
           ))}
       </ul>

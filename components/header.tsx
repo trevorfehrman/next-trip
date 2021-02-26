@@ -1,7 +1,7 @@
-import styles from '../styles/Header.module.scss';
+import styles from 'styles/Header.module.scss';
 const Header = () => {
   return (
-    <div>
+    <div className={styles.header}>
       <img src='/MetroTransitLogo.svg' alt='' />
     </div>
   );

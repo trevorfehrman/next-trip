@@ -1,0 +1,10 @@
+.stop {
+  background-color: #5353ee;
+  color: white;
+  padding: 2rem;
+  list-style: none;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #393939;
+  }
+}
