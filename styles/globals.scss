@@ -132,5 +132,15 @@ table {
 body {
   font-size: 1.6rem;
   font-family: 'Comfortaa', cursive;
+  color: var(--primary-black);
   line-height: 2.2rem;
+}
+
+:root {
+  --primary-red: #e54050;
+  --primary-blue: #6e6ee1;
+  --primary-yellow: #ffee58;
+  --primary-white: #fff;
+  --primary-black: #3d3d3d;
+  --light-gray: #f2f2f2;
 }

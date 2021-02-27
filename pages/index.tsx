@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styles from 'styles/Home.module.scss';
+import styles from 'styles/Routes.module.scss';
 
 import Head from 'next/head';
 import Link from 'next/link';
@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 
 import { IRoute } from 'interfaces';
 import { RouteContext } from './_app';
+import { Route } from 'components/route';
 
 function getRoutes() {
   return fetch('http://svc.metrotransit.org/NexTrip/Routes?format=json', {
@@ -26,7 +27,7 @@ type HomeProps = {
   routes: IRoute[];
 };
 
-const Home = ({ routes }: HomeProps) => {
+const RoutesScreen = ({ routes }: HomeProps) => {
   const [searchTerm, setSearchTerm] = React.useState<string>('');
   const { setRouteDirection } = React.useContext(RouteContext);
 
@@ -44,6 +45,7 @@ const Home = ({ routes }: HomeProps) => {
         className={styles.searchField}
       />
       <ul>
+        {/* TODO  use .reduce here*/}
         {routes
           .filter(route => {
             if (!searchTerm) {
@@ -53,18 +55,11 @@ const Home = ({ routes }: HomeProps) => {
             }
           })
           .map(route => (
-            <Link href={`/${route.Route}`} key={route.Route}>
-              <li
-                onClick={() => setRouteDirection({ route: route.Description, direction: '' })}
-                className={styles.route}
-              >
-                {route.Description}
-              </li>
-            </Link>
+            <Route key={route.Description} route={route} />
           ))}
       </ul>
     </motion.main>
   );
 };
 
-export default Home;
+export default RoutesScreen;

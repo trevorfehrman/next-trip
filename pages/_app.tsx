@@ -16,6 +16,8 @@ export default function App({ Component, pageProps, router }: AppProps) {
   const [routeDirection, setRouteDirection] = React.useState<IRouteDirection>({
     route: '',
     direction: '',
+    previousRoute: '',
+    preveiousDirection: '',
   });
   return (
     <>

@@ -1,9 +1,12 @@
-import styles from 'styles/Route.module.scss';
+import * as React from 'react';
+import styles from 'styles/Direction.module.scss';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { motion } from 'framer-motion';
 
 import { IDirection, IRoute } from 'interfaces';
+import { RouteContext } from 'pages/_app';
 
 export async function getStaticPaths() {
   // Call an external API endpoint to get posts
@@ -48,13 +51,47 @@ type RouteProps = {
   route: string;
 };
 
-const Route = ({ directions, route }: RouteProps) => {
+const DirectionScreen = ({ directions, route }: RouteProps) => {
+  const { routeDirection, setRouteDirection } = React.useContext(RouteContext);
+  const router = useRouter();
+
+  React.useEffect(() => {
+    router.beforePopState(popstate => {
+      const urlArray = popstate.as.split('/');
+
+      if (urlArray[1] && urlArray[2]) {
+        // We are navigating to the stops screen from the directions screen
+        setRouteDirection(prev => ({ ...prev, direction: prev.preveiousDirection }));
+        return true;
+      } else if (urlArray[1]) {
+        // We are navigationg to the directions screen from either the stops screen *or* the routes screen
+        setRouteDirection(prev => ({
+          ...prev,
+          direction: '',
+          route: routeDirection.route ? routeDirection.route : '',
+        }));
+        return true;
+      } else {
+        // We are navigating to the routes screen from the directions screen
+        setRouteDirection(prev => ({ ...prev, route: '' }));
+        return true;
+      }
+    });
+  }, []);
+
   return (
     <motion.main initial={{ y: '100vh' }} animate={{ y: 0 }} exit={{ y: '100vh' }}>
       <ul>
         {directions.map((direction, key) => (
           <Link key={direction.Value} href={`/${route}/${direction.Value}`}>
             <li
+              onClick={() =>
+                setRouteDirection(prev => ({
+                  ...prev,
+                  direction: direction.Text,
+                  preveiousDirection: direction.Text,
+                }))
+              }
               className={`${styles.direction} 
               ${key === 0 ? styles.firstDirection : styles.secondDirection}`}
             >
@@ -67,4 +104,4 @@ const Route = ({ directions, route }: RouteProps) => {
   );
 };
 
-export default Route;
+export default DirectionScreen;

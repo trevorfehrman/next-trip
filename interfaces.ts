@@ -17,6 +17,8 @@ interface IStop {
 interface IRouteDirection {
   route: string;
   direction: string;
+  previousRoute: string;
+  preveiousDirection: string;
 }
 
 export type { IRoute, IDirection, IStop, IRouteDirection };

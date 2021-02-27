@@ -1,0 +1,35 @@
+.stop {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+
+    &:after {
+      content: '';
+      height: 3rem;
+      width: 2px;
+      background-color: var(--primary-red);
+      position: absolute;
+      bottom: -2.5rem;
+      left: 35%;
+    }
+  }
+
+  &:first-child {
+    margin-top: 2rem;
+  }
+
+  .pin {
+    min-width: 5rem;
+    min-height: 5rem;
+    font-size: 5rem;
+    color: var(--primary-blue);
+    margin: 1rem;
+  }
+
+  .text {
+    margin: 0 2rem;
+  }
+}

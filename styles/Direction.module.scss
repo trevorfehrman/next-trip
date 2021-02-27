@@ -1,10 +1,15 @@
-.stop {
-  background-color: #5353ee;
-  color: white;
-  padding: 2rem;
-  list-style: none;
+.direction {
+  height: calc(50vh - 7.6rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-white);
+  font-size: 2rem;
+}
 
-  &:not(:last-child) {
-    border-bottom: 1px solid #393939;
-  }
+.firstDirection {
+  background-color: var(--primary-red);
+}
+.secondDirection {
+  background-color: var(--primary-blue);
 }
