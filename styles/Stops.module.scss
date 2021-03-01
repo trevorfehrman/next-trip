@@ -2,19 +2,10 @@
   display: flex;
   align-items: center;
   position: relative;
+  cursor: pointer;
 
   &:not(:last-child) {
     margin-bottom: 2rem;
-
-    &:after {
-      content: '';
-      height: 3rem;
-      width: 2px;
-      background-color: var(--primary-red);
-      position: absolute;
-      bottom: -2.5rem;
-      left: 35%;
-    }
   }
 
   &:first-child {

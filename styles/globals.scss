@@ -125,6 +125,32 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+button {
+  border: none;
+  margin: 0;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+  transition: background 250ms ease-in-out, transform 150ms ease;
+  font-size: 1.6rem;
+  font-family: 'Comfortaa', cursive;
+  color: var(--primary-black);
+  line-height: 2.2rem;
+}
+
+button:hover,
+button:focus {
+  background: #0053ba;
+}
+
+button:focus {
+  outline: 1px solid #fff;
+  outline-offset: -4px;
+}
+
+button:active {
+  transform: scale(0.99);
+}
 
 * {
   box-sizing: border-box;

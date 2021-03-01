@@ -1,32 +1,34 @@
 import * as React from 'react';
 import styles from 'styles/Routes.module.scss';
-import { IRoute } from 'interfaces';
+
 import Link from 'next/link';
+
 import { RiArrowRightSLine } from 'react-icons/ri';
+
 import { RouteContext } from 'pages/_app';
+import { IRoute } from 'interfaces';
 
 const Route = ({ route }: { route: IRoute }) => {
   const { setRouteDirection } = React.useContext(RouteContext);
-  const [segments, setSegments] = React.useState<string[]>();
-
   const regex = new RegExp('[0-9]');
+
+  const [segments, setSegments] = React.useState<string[]>();
 
   React.useEffect(() => {
     setSegments(route.Description.split('-'));
   }, [route]);
 
+  function handleClick() {
+    setRouteDirection(prev => ({
+      ...prev,
+      route: route.Description,
+      previousRoute: route.Description,
+    }));
+  }
+
   return (
     <Link href={`/${route.Route}`}>
-      <li
-        onClick={() =>
-          setRouteDirection(prev => ({
-            ...prev,
-            route: route.Description,
-            previousRoute: route.Description,
-          }))
-        }
-        className={styles.route}
-      >
+      <li onClick={handleClick} className={styles.route}>
         {regex.test(route.Description[0]) ? (
           // If the first character is a number, then we are on a numbered route.
           <>

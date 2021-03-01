@@ -1,13 +1,10 @@
 import * as React from 'react';
 import styles from 'styles/Routes.module.scss';
 
-import Head from 'next/head';
-import Link from 'next/link';
-
 import { motion } from 'framer-motion';
 
 import { IRoute } from 'interfaces';
-import { RouteContext } from './_app';
+
 import { Route } from 'components/route';
 
 function getRoutes() {
@@ -23,13 +20,8 @@ export async function getStaticProps() {
   return { props: { routes }, revalidate: 5000 };
 }
 
-type HomeProps = {
-  routes: IRoute[];
-};
-
-const RoutesScreen = ({ routes }: HomeProps) => {
+const RoutesScreen = ({ routes }: { routes: IRoute[] }) => {
   const [searchTerm, setSearchTerm] = React.useState<string>('');
-  const { setRouteDirection } = React.useContext(RouteContext);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setSearchTerm(event.target.value);
@@ -45,14 +37,11 @@ const RoutesScreen = ({ routes }: HomeProps) => {
         className={styles.searchField}
       />
       <ul>
-        {/* TODO  use .reduce here*/}
         {routes
           .filter(route => {
-            if (!searchTerm) {
-              return true;
-            } else {
-              return route.Description.toLowerCase().includes(searchTerm.toLowerCase());
-            }
+            return searchTerm
+              ? route.Description.toLowerCase().includes(searchTerm.toLowerCase())
+              : true;
           })
           .map(route => (
             <Route key={route.Description} route={route} />

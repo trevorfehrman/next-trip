@@ -1,4 +1,6 @@
 import styles from 'styles/Stops.module.scss';
+import { useRouter } from 'next/router';
+
 import { motion } from 'framer-motion';
 
 import { IStop } from 'interfaces';
@@ -26,11 +28,17 @@ export async function getServerSideProps({
 }
 
 const StopsScreen = ({ stops }: { stops: IStop[] }) => {
+  const router = useRouter();
+
   return (
     <motion.main initial={{ y: '100vh' }} animate={{ y: 0 }} exit={{ y: '100vh' }}>
       <ul>
         {stops.map(stop => (
-          <li className={styles.stop} key={stop.Value}>
+          <li
+            className={styles.stop}
+            key={stop.Value}
+            onClick={() => router.push(`https://maps.google.com/?q=${stop.Text}+minnesota`)}
+          >
             <RiMapPin2Line className={styles.pin} />
             <span className={styles.text}>{stop.Text}</span>
           </li>
