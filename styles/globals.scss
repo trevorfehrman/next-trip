@@ -162,6 +162,16 @@ body {
   line-height: 2.2rem;
 }
 
+#nprogress .bar {
+  background: var(--primary-blue) !important;
+  height: 2rem;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: var(--primary-blue) !important;
+  border-left-color: var(--primary-blue) !important;
+}
+
 :root {
   --primary-red: #e54050;
   --primary-blue: #6e6ee1;

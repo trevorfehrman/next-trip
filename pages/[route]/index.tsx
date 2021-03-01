@@ -2,6 +2,7 @@ import * as React from 'react';
 import styles from 'styles/Direction.module.scss';
 
 import Link from 'next/link';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { motion } from 'framer-motion';
@@ -62,27 +63,33 @@ const DirectionScreen = ({ directions, route }: RouteProps) => {
   }, []);
 
   return (
-    <motion.main initial={{ y: '100vh' }} animate={{ y: 0 }} exit={{ y: '100vh' }}>
-      <ul>
-        {directions.map((direction, index) => (
-          <Link key={direction.Value} href={`/${route}/${direction.Value}`}>
-            <li
-              onClick={() =>
-                setRouteDirection(prev => ({
-                  ...prev,
-                  direction: direction.Text,
-                  preveiousDirection: direction.Text,
-                }))
-              }
-              className={`${styles.direction} 
+    <>
+      <Head>
+        <title>Directions</title>
+        <meta name='description' content='Availible directions for this route.'></meta>
+      </Head>
+      <motion.main initial={{ y: '100vh' }} animate={{ y: 0 }} exit={{ y: '100vh' }}>
+        <ul>
+          {directions.map((direction, index) => (
+            <Link key={direction.Value} href={`/${route}/${direction.Value}`}>
+              <li
+                onClick={() =>
+                  setRouteDirection(prev => ({
+                    ...prev,
+                    direction: direction.Text,
+                    preveiousDirection: direction.Text,
+                  }))
+                }
+                className={`${styles.direction} 
               ${index === 0 ? styles.firstDirection : styles.secondDirection}`}
-            >
-              <span>{direction.Text}</span>
-            </li>
-          </Link>
-        ))}
-      </ul>
-    </motion.main>
+              >
+                <span>{direction.Text}</span>
+              </li>
+            </Link>
+          ))}
+        </ul>
+      </motion.main>
+    </>
   );
 };
 

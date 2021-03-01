@@ -1,15 +1,16 @@
 import * as React from 'react';
 import 'styles/globals.scss';
+import 'nprogress/nprogress.css';
 
 import { AppProps } from 'next/app';
+import Router from 'next/router';
 
 import { AnimatePresence } from 'framer-motion';
+import NProgress from 'nprogress';
 
 import { IRouteDirection } from 'interfaces';
 
 import { Header } from 'components/header';
-
-import Router from 'next/router';
 
 export const RouteContext = React.createContext<{
   routeDirection: IRouteDirection;
@@ -18,6 +19,13 @@ export const RouteContext = React.createContext<{
 RouteContext.displayName = 'RouteContext';
 
 export default function App({ Component, pageProps, router }: AppProps) {
+  NProgress.configure({
+    minimum: 0.3,
+    easing: 'ease',
+    speed: 800,
+    showSpinner: false,
+  });
+
   const routeChange = () => {
     // Temporary fix to avoid flash of unstyled content
     // during route transitions. Keep an eye on this
@@ -35,6 +43,10 @@ export default function App({ Component, pageProps, router }: AppProps) {
 
   Router.events.on('routeChangeComplete', routeChange);
   Router.events.on('routeChangeStart', routeChange);
+  Router.events.on('routeChangeStart', () => NProgress.start());
+  Router.events.on('routeChangeComplete', () => NProgress.done());
+  Router.events.on('routeChangeError', () => NProgress.done());
+
   const [routeDirection, setRouteDirection] = React.useState<IRouteDirection>({
     route: '',
     direction: '',
