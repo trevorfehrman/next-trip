@@ -3,4 +3,5 @@ module.exports = {
   moduleNameMapper: {
     '^.+\\.scss$': 'identity-obj-proxy',
   },
+  modulePathIgnorePatterns: ['./cypress/e2e'],
 };

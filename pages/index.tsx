@@ -4,16 +4,9 @@ import styles from 'styles/Routes.module.scss';
 import { motion } from 'framer-motion';
 
 import { IRoute } from 'interfaces';
+import { getRoutes } from 'client/helpers';
 
 import { Route } from 'components/route';
-
-function getRoutes() {
-  return fetch('http://svc.metrotransit.org/NexTrip/Routes?format=json', {
-    mode: 'no-cors',
-    method: 'get',
-    headers: { 'Content-Type': 'application/json' },
-  });
-}
 
 export async function getStaticProps() {
   const routes = await (await getRoutes()).json();
@@ -30,13 +23,15 @@ const RoutesScreen = ({ routes }: { routes: IRoute[] }) => {
   return (
     <motion.main initial={{ y: '100vh' }} animate={{ y: 0 }} exit={{ y: '100vh' }}>
       <input
+        name='search'
         placeholder='Search...'
-        type='text'
+        type='search'
+        autoComplete='off'
         onChange={handleChange}
         value={searchTerm}
         className={styles.searchField}
       />
-      <ul>
+      <ul className={styles.routesContainer}>
         {routes
           .filter(route => {
             return searchTerm

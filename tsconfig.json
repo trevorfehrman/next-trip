@@ -14,7 +14,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": ".",
-    "types": ["cypress", "@testing-library/cypress"]
+    "types": ["cypress", "@testing-library/cypress", "jest"]
   },
   "include": [
     "next-env.d.ts",
@@ -22,7 +22,8 @@
     "**/*.tsx",
     "pages/_app.js",
     "pages/_document.js",
-    "test"
+    "test",
+    "node_modules/jest-dom"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "e2e"]
 }

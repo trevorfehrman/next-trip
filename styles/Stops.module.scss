@@ -1,26 +1,57 @@
-.stop {
-  display: flex;
-  align-items: center;
-  position: relative;
-  cursor: pointer;
-
-  &:not(:last-child) {
-    margin-bottom: 2rem;
+.stopsContainer {
+  @media screen and (min-width: 1000px) {
+    width: 47rem;
+    margin: 0 auto 2rem auto;
   }
 
-  &:first-child {
-    margin-top: 2rem;
-  }
+  .stop {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 
-  .pin {
-    min-width: 5rem;
-    min-height: 5rem;
-    font-size: 5rem;
-    color: var(--primary-blue);
-    margin: 1rem;
-  }
+    &:not(:last-child) {
+      margin-bottom: 2rem;
+    }
 
-  .text {
-    margin: 0 2rem;
+    &:first-child {
+      margin-top: 2rem;
+    }
+
+    @media screen and (min-width: 1000px) {
+      justify-content: space-between;
+      border-radius: 5rem;
+      text-align: right;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        color: white;
+        background: linear-gradient(
+          90deg,
+          #4772ff,
+          #4f71fb,
+          #5671f6,
+          #5c70f2,
+          #626fee,
+          #666fe9,
+          #6a6ee5,
+          #6e6ee1
+        );
+
+        & svg {
+          color: white;
+        }
+      }
+    }
+
+    .pin {
+      min-width: 5rem;
+      min-height: 5rem;
+      color: var(--primary-blue);
+      margin: 1rem;
+    }
+
+    .text {
+      margin: 0 2rem;
+    }
   }
 }

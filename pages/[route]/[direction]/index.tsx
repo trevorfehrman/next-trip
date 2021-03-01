@@ -1,38 +1,36 @@
 import styles from 'styles/Stops.module.scss';
+
 import { useRouter } from 'next/router';
 
 import { motion } from 'framer-motion';
+import { RiMapPin2Line } from 'react-icons/ri';
 
 import { IStop } from 'interfaces';
-
-import { RiMapPin2Line } from 'react-icons/ri';
+import { getStops } from 'client/helpers';
 
 export async function getServerSideProps({
   params,
 }: {
   params: { route: string; direction: string };
 }) {
-  const res = await fetch(
-    `https://svc.metrotransit.org/NexTrip/Stops/${params.route}/${params.direction}?format=json`,
-    {
-      mode: 'no-cors',
-      method: 'get',
-      headers: { 'Content-Type': 'application/json' },
-    }
-  );
-
+  const res = await getStops(params.route, params.direction);
   const stops = await res.json();
+
   return {
     props: { stops },
   };
 }
 
-const StopsScreen = ({ stops }: { stops: IStop[] }) => {
+type StopsScreeenProps = {
+  stops: IStop[];
+};
+
+const StopsScreen = ({ stops }: StopsScreeenProps) => {
   const router = useRouter();
 
   return (
     <motion.main initial={{ y: '100vh' }} animate={{ y: 0 }} exit={{ y: '100vh' }}>
-      <ul>
+      <ul className={styles.stopsContainer}>
         {stops.map(stop => (
           <li
             className={styles.stop}
