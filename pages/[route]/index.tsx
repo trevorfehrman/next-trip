@@ -26,7 +26,7 @@ export async function getStaticProps({ params }: { params: { route: string } }) 
   const res = await getDirections(params.route);
   const directions: IDirection[] = await res.json();
 
-  return { props: { directions, route: params.route } };
+  return { props: { directions, route: params.route }, revalidate: 5000 };
 }
 
 type RouteProps = {

@@ -1,5 +1,5 @@
 .routesContainer {
-  @media screen and (min-width: 1000px) {
+  @media screen and (min-width: 1025px) {
     width: 57rem;
     margin: 0 auto 2rem auto;
   }
@@ -19,7 +19,7 @@
 
     // Self-chain to safely increase specificity
     &.route {
-      @media screen and (min-width: 1000px) {
+      @media screen and (min-width: 1025px) {
         border-bottom: none;
         box-shadow: none;
         transition: all 0.2s ease-in-out;
@@ -68,7 +68,7 @@
       min-height: 4rem;
       color: var(--primary-red);
 
-      @media screen and (min-width: 1000px) {
+      @media screen and (min-width: 1025px) {
         color: var(--primary-black);
       }
     }
@@ -83,7 +83,7 @@
   font-size: 16px;
   font-family: 'Comfortaa', cursive;
 
-  @media screen and (min-width: 1000px) {
+  @media screen and (min-width: 1025px) {
     width: 57rem;
     margin: 2rem auto;
     display: block;

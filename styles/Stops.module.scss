@@ -1,5 +1,5 @@
 .stopsContainer {
-  @media screen and (min-width: 1000px) {
+  @media screen and (min-width: 1025px) {
     width: 47rem;
     margin: 0 auto 2rem auto;
   }
@@ -17,7 +17,7 @@
       margin-top: 2rem;
     }
 
-    @media screen and (min-width: 1000px) {
+    @media screen and (min-width: 1025px) {
       justify-content: space-between;
       border-radius: 5rem;
       text-align: right;

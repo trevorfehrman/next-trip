@@ -10,7 +10,17 @@
 
 .firstDirection {
   background-color: var(--primary-red);
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #e54050d4;
+  }
 }
 .secondDirection {
   background-color: var(--primary-blue);
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #6e6ee1d4;
+  }
 }
