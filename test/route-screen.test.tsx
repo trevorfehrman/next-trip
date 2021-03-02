@@ -33,7 +33,7 @@ test('navigate to next screen on link click', () => {
 });
 
 test('filters the routes on search', () => {
-  const input = screen.getByRole('textbox') as HTMLInputElement;
+  const input = screen.getByRole('searchbox') as HTMLInputElement;
   fireEvent.change(input, { target: { value: '2' } });
   expect(input.value).toBe('2');
 
